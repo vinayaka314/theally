@@ -1,0 +1,158 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My Site</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			font-family: Arial, sans-serif;
+		}
+		.header {
+			background-color: black;
+			color: #fff;
+			padding: 20px;
+			display: flex;
+			align-items: center;
+		}
+		.logo {
+			font-size: 24px;
+			font-weight: bold;
+			flex-grow: 1;
+            transition: color 0.5s ease;
+		}
+        .logo  {
+            color: white;
+            text-decoration: none;
+        }
+        .logo:hover{
+            color: red;
+        }
+		.nav {
+			display: flex;
+			align-items: center;
+		}
+		.nav li {
+			list-style: none;
+			margin-left: 20px;
+		}
+		.nav a {
+			color: #fff;
+			text-decoration: none;
+			font-weight: bold;
+			font-size: 16px;
+			padding: 10px;
+			border-radius: 3px;
+			transition: color 0.2s ease;
+		}
+		
+        .nav a:hover {
+			color: red;
+		}
+		.container {
+			margin: 50px auto;
+			max-width: 800px;
+			padding: 0 20px;
+		}
+		h1 {
+			font-size: 36px;
+			margin-bottom: 30px;
+		}
+		p {
+			font-size: 18px;
+			margin-bottom: 20px;
+			line-height: 1.5;
+		}
+		.nav ul {
+			display: flex;
+			margin: 0;
+			padding: 0;
+			flex-wrap: wrap;
+			justify-content: flex-end;
+		}
+        .table {
+        width: 100%;
+        margin-bottom: 1rem;
+        background-color: #fff;
+        border-collapse: collapse;
+        border: 1px solid #dee2e6;
+        white-space: nowrap;
+    }
+
+    .table th,
+    .table td {
+        padding: 0.75rem;
+        vertical-align: top;
+        border-top: 1px solid #dee2e6;
+    }
+
+    .table thead th {
+        vertical-align: bottom;
+        border-bottom: 2px solid #dee2e6;
+    }
+
+    .table tbody + tbody {
+        border-top: 2px solid #dee2e6;
+    }
+	</style>
+</head>
+<body>
+	<header class="header">
+		<div class="logo">The Ally</div>
+		<nav class="nav">
+			<ul>
+                <li><a href="/signout">Logout</a></li>
+			</ul>
+		</nav>
+	</header>
+    <h1>Dashboard</h1>
+	<div class="container">
+		<h1>Welcome to My Site</h1>
+	</div>
+
+    <h1>User List</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th>Name</th>
+                <th>Entered Referral Code</th>
+                <th>My Referral Code</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.email }}</td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.referral_code }}</td>
+                <td>{{ user.my_ref_code}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <h1>Referral Codes</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Code</th>
+                <th>Referred By</th>
+                <th>Referred User</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for referral_code in referral_codes %}
+            <tr>
+                <td>{{ referral_code.code }}</td>
+                <td>{{ referral_code.referred_by.email }}</td>
+                <td>{% if referral_code.referred_user %}{{ referral_code.referred_user.email }}{% endif %}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>
